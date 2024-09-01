@@ -549,7 +549,7 @@ autoplay = "default"
 frame_progress = 0.738029
 
 [node name="Player" parent="." instance=ExtResource("1_vwbba")]
-position = Vector2(288, 519)
+position = Vector2(344, 600)
 
 [node name="Borders" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
