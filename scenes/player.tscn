@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl5du5s0wq6yl"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_g4bnk"]
+[ext_resource type="Texture2D" uid="uid://c01a3jj4i2upb" path="res://kenney_space-shooter-redux/playerShip1_red.png" id="1_gq3bt"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_g4bnk")
+speed = 200
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_gq3bt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -37, 7, -37, 13, -11, 36, 2, 48, -6, 45, 25, 13, 27, 8, 37, -7, 37, -14, 27, -44, 24, -49, -5, -37, 1, -12, -13)
+
+[node name="LaserStartPos" type="Marker2D" parent="."]
+position = Vector2(0, -53)
+
+[node name="LaserTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
