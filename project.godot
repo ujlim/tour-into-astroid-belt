@@ -15,10 +15,24 @@ run/main_scene="res://scenes/level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://global/global.gd"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[importer_defaults]
+
+mp3={
+"bar_beats": 4,
+"beat_count": 0,
+"bpm": 0,
+"loop": true,
+"loop_offset": 0
+}
 
 [input]
 
