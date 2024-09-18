@@ -22,7 +22,12 @@ func _process(_delta):
 		laser.emit($LaserStartPos.global_position) 
 		can_shoot = false
 		$LaserTimer.start()
+		$LaserSound.play()
 
 
 func _on_laser_timer_timeout():
 	can_shoot = true
+
+func play_collision_sound():
+	$DemageSound.play()
+

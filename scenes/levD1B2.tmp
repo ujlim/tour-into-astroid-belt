@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkd6kcxatgtf0"]
+[gd_scene load_steps=12 format=3 uid="uid://dkd6kcxatgtf0"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_sree6"]
 [ext_resource type="PackedScene" uid="uid://bl5du5s0wq6yl" path="res://scenes/player.tscn" id="1_vwbba"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b58lddu2acj2d" path="res://kenney_space-shooter-redux/PNG/Effects/star2.png" id="5_bjefq"]
 [ext_resource type="Texture2D" uid="uid://ceg86wcwbtma5" path="res://kenney_space-shooter-redux/PNG/Effects/star3.png" id="6_nfhh7"]
 [ext_resource type="PackedScene" uid="uid://b4n6jevcqnagr" path="res://scenes/ui.tscn" id="7_bujst"]
-[ext_resource type="AudioStream" uid="uid://d1sbrwgjup72d" path="res://audio/level-music-trance-arp-loop-128bpm-240905.mp3" id="8_mbn3t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8rh73"]
 animations = [{
@@ -552,7 +551,7 @@ autoplay = "default"
 frame_progress = 0.738029
 
 [node name="Player" parent="." instance=ExtResource("1_vwbba")]
-position = Vector2(544, 504)
+position = Vector2(184, 608)
 
 [node name="Borders" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -592,15 +591,10 @@ autostart = true
 
 [node name="Lazers" type="Node2D" parent="."]
 
-[node name="UI" parent="." groups=["ui"] instance=ExtResource("7_bujst")]
+[node name="UI" parent="." instance=ExtResource("7_bujst")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i1p7e")
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_mbn3t")
-volume_db = -5.954
-autoplay = true
 
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
 [connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]

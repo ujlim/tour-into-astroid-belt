@@ -1,12 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl5du5s0wq6yl"]
+[gd_scene load_steps=10 format=3 uid="uid://bl5du5s0wq6yl"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_g4bnk"]
 [ext_resource type="Texture2D" uid="uid://c01a3jj4i2upb" path="res://kenney_space-shooter-redux/playerShip1_red.png" id="1_gq3bt"]
+[ext_resource type="AudioStream" uid="uid://cffqflr5dl0lv" path="res://audio/player-laser.mp3" id="3_71f7c"]
+[ext_resource type="AudioStream" uid="uid://nb27g7nhwm2n" path="res://audio/player-demage.mp3" id="4_p5iba"]
+
+[sub_resource type="Gradient" id="Gradient_id5wf"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4pi6k"]
+gradient = SubResource("Gradient_id5wf")
+
+[sub_resource type="Curve" id="Curve_tjy8y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w55xf"]
+curve = SubResource("Curve_tjy8y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l370s"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 151, 0)
+scale_min = 12.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_w55xf")
+color = Color(1, 0.0588235, 0.12549, 1)
+color_ramp = SubResource("GradientTexture1D_4pi6k")
+sub_emitter_mode = 1
+sub_emitter_frequency = 12.65
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_g4bnk")
-speed = 200
+speed = 400
 
 [node name="PlayerImage" type="Sprite2D" parent="."]
 texture = ExtResource("1_gq3bt")
@@ -20,5 +45,21 @@ position = Vector2(0, -53)
 [node name="LaserTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_71f7c")
+
+[node name="DemageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_p5iba")
+pitch_scale = 1.17
+max_distance = 1991.0
+attenuation = 0.406126
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 44)
+process_material = SubResource("ParticleProcessMaterial_l370s")
 
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]

@@ -4,6 +4,9 @@ var speed : int
 var direction_x : float
 var rotation_speed : int
 
+signal collision
+var can_collide := true
+
 func _ready():
 	var rng := RandomNumberGenerator.new()
 	
@@ -32,6 +35,14 @@ func _process(delta):
 	position += Vector2(direction_x, 1.0) * speed * delta
 	rotation_degrees += rotation_speed * delta
 	
-func _on_body_entered(body):
-	print('body entered')
-	print(body)
+func _on_body_entered(_body):
+	if can_collide:
+		collision.emit()
+
+func _on_area_entered(area):
+	area.queue_free()
+	$ExplosionSound.play()
+	$Sprite2D.hide()
+	can_collide = false
+	await get_tree().create_timer(1).timeout
+	queue_free()

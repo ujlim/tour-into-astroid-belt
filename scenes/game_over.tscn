@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpowbqkoxmlsy"]
+[gd_scene load_steps=5 format=3 uid="uid://bpowbqkoxmlsy"]
 
 [ext_resource type="FontFile" uid="uid://cbya1aga1tm56" path="res://kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="1_1sy6m"]
+[ext_resource type="Script" path="res://scenes/game_over.gd" id="1_omy2p"]
+[ext_resource type="PackedScene" uid="uid://dkd6kcxatgtf0" path="res://scenes/level.tscn" id="2_s8pah"]
+[ext_resource type="AudioStream" uid="uid://bcneg3ysqu8hj" path="res://audio/gameover-music-percussion-loop.mp3" id="4_086t0"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -10,6 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.00235394
+script = ExtResource("1_omy2p")
+level_scene = ExtResource("2_s8pah")
 
 [node name="BG" type="ColorRect" parent="."]
 layout_mode = 1
@@ -49,7 +54,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_1sy6m")
 theme_override_font_sizes/font_size = 25
-text = "Score 0"
+text = "Score: "
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -71,3 +76,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_1sy6m")
 text = "Press space to start again"
 horizontal_alignment = 1
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_086t0")
+autoplay = true
